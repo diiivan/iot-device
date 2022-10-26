@@ -1,0 +1,3 @@
+FROM corvana/greenplum-oss:6.11.2
+
+COPY start-singlenode.sh /gpdb

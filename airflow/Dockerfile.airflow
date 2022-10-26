@@ -1,0 +1,15 @@
+FROM alpine:3.16
+
+WORKDIR /root/airflow
+
+RUN apk add --update --no-cache python3 python3-dev py3-pip bash gcc g++ musl-dev linux-headers tzdata
+
+RUN pip3 install "apache-airflow[celery]==2.4.1" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.4.1/constraints-3.7.txt"
+
+ARG AIRFLOW_USERNAME
+ARG AIRFLOW_PASSWORD
+
+RUN airflow db init
+RUN airflow users create --role Admin --username "$AIRFLOW_USERNAME" --email noreply@example.org --firstname john --lastname doe --password "$AIRFLOW_PASSWORD"
+
+CMD (airflow scheduler &) && airflow webserver
