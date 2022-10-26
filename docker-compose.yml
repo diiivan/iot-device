@@ -10,6 +10,9 @@ services:
             args:
               AIRFLOW_USERNAME: ${AIRFLOW_USERNAME:?AIRUSER blank}
               AIRFLOW_PASSWORD: ${AIRFLOW_PASSWORD:?AIRPASS blank}
+        networks:
+            default:
+                ipv4_address: 172.16.0.4
         ports:
         - 127.0.0.1:8080:8080
         volumes:
@@ -32,7 +35,6 @@ services:
         build:
           context: ./greenplum
           dockerfile: Dockerfile.greenplum
-        #image: corvana/greenplum-oss:6.11.2
         networks:
             default:
                 ipv4_address: 172.16.0.2
