@@ -88,6 +88,20 @@ services:
       retries: 1000
       start_period: 15s
 
+  producer:
+      container_name: producer
+      build:
+        context: ./producer
+        dockerfile: Dockerfile.producer
+      networks:
+        default:
+          ipv4_address: 172.16.0.7
+      environment:
+        - PYTHONUNBUFFERED=1
+      depends_on:
+        kafka:
+          condition: service_healthy
+
 networks:
   default:
     ipam:
