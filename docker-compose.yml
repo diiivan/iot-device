@@ -102,6 +102,22 @@ services:
         kafka:
           condition: service_healthy
 
+  consumer:
+    container_name: consumer
+    build:
+      context: ./consumer
+      dockerfile: Dockerfile.consumer
+    networks:
+      default:
+        ipv4_address: 172.16.0.8
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      greenplum:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+
 networks:
   default:
     ipam:
