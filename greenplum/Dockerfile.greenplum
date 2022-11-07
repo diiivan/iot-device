@@ -1,3 +1,3 @@
 FROM corvana/greenplum-oss:6.11.2
 
-COPY start-singlenode.sh /gpdb
+RUN apt update && apt install -y netcat
