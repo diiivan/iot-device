@@ -3,27 +3,6 @@ import psycopg2
 
 from kafka import KafkaConsumer
 
-
-def create_tables(cursor, conn):
-    cursor.execute('CREATE TABLE IF NOT EXISTS records('
-                   'occur_time TIMESTAMP NOT NULL,'
-                   'sensor_id INT NOT NULL,'
-                   'latitude TEXT NOT NULL,'
-                   'longitude TEXT NOT NULL,'
-                   'temperature INT NOT NULL,'
-                   'controller_id TEXT NOT NULL)')
-
-    cursor.execute('CREATE TABLE IF NOT EXISTS filtered_records('
-                   'occur_time TIMESTAMP NOT NULL,'
-                   'sensor_id INT NOT NULL,'
-                   'latitude TEXT NOT NULL,'
-                   'longitude TEXT NOT NULL,'
-                   'temperature INT NOT NULL,'
-                   'controller_id TEXT NOT NULL)')
-
-    conn.commit()
-
-
 kafka_hostname = '172.16.0.3'
 kafka_port = '9092'
 topic = 'iot'
@@ -54,8 +33,6 @@ while True:
 
 cursor = conn.cursor()
 print(f'Подключено к Greenplum: {greenplum_hostname}:{greenplum_port}, БД: {greenplum_database_name}')
-
-create_tables(cursor, conn)
 
 count = 0
 
