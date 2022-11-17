@@ -30,18 +30,17 @@ def setup_sensors(filename):
 
 
 def generate_event(sensors, producer, topic, count):
-    count += 1
-    sensor = random.choice(sensors)
-    temperature = random.randint(-20, 20)
-    occur_time = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S")
+    for sensor in sensors:
+        count += 1
+        temperature = random.randint(-20, 20)
+        occur_time = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S")
+        sensor["occur_time"] = occur_time
+        sensor["temperature"] = temperature
 
-    sensor["occur_time"] = occur_time
-    sensor["temperature"] = temperature
+        producer.send(topic, sensor)
 
-    producer.send(topic, sensor)
-
-    print(f'{occur_time}: Запись события #{count} в Kafka: датчик #{sensor["sensor_id"]} ({sensor["latitude"]}, {sensor["longitude"]}): '
-          f'температура: {temperature}')
+        print(f'{occur_time}: Запись события #{count} в Kafka: датчик #{sensor["sensor_id"]} ({sensor["latitude"]}, '
+              f'{sensor["longitude"]}): температура: {temperature}')
     return count
 
 
