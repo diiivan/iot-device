@@ -5,7 +5,7 @@
 3. dags - содержит DAG-файлы для Airflow
 4. producer - содержит producer для Kafka
 5. consumer - содержит consumer для Kafka
-5. /venv.sh - загрузка зависимостей
+5. venv.sh - загрузка зависимостей
 6. ps.sh - мониторинг состояния контейнеров
 7. cleanup.sh - удаление контейнеров проекта и хранилища БД
 
