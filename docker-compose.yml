@@ -10,6 +10,9 @@ services:
       args:
         AIRFLOW_USERNAME: ${AIRFLOW_USERNAME:?AIRUSER blank}
         AIRFLOW_PASSWORD: ${AIRFLOW_PASSWORD:?AIRPASS blank}
+        DATABASE_NAME: ${DATABASE_NAME:?DBNAME blank}
+        DATABASE_USER: ${DATABASE_USER:?DBUSER blank}
+        DATABASE_PASSWORD: ${DATABASE_PASSWORD:?DBPASS blank}
     networks:
       default:
         ipv4_address: 172.16.0.4
@@ -28,6 +31,8 @@ services:
       - 8888:8888
     volumes:
       - ./dags:/home/jovyan/dags
+      - ./consumer:/home/jovyan/consumer
+      - ./producer:/home/jovyan/producer
     env_file: .env
     networks:
       default:
