@@ -84,5 +84,5 @@
 * Git 2.38.1+
 * Docker 20.10.21+
 * Docker-Compose 1.29.2+
-* Firefox 107.0.1+ или Google Chrome 98.0.4758.80+
+* Firefox 107.0.1+ или Google Chrome 107.0.5304.122-1.1+
 * Postgresql 14.3+ (требуется только для проверки результата)
