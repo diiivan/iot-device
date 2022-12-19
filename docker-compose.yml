@@ -22,6 +22,9 @@ services:
       - ./dags:/root/airflow/dags
       - ./airflow/airflow.cfg:/root/airflow/airflow.cfg
     env_file: .env
+    depends_on:
+      greenplum:
+        condition: service_healthy
 
   jupyter:
     container_name: jupyter
